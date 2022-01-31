@@ -1,0 +1,15 @@
+POST http://localhost:3000/api/sauces
+
+Authorization: Bearer eqJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWYzOWRiNTllMjk4ZjliYTc0NmYzYzgiLCJpYXQiOjE2NDMzNzgxODEsImV4cCI6MTY0MzQ2NDU4MX0.5pd1MyfeX-7Y-Vk3T04U5UEKfBwB3WgRf8gm_FCiIag
+
+------WebKitFormBoundary65AqPXz033r5JoMe
+Content-Disposition: form-data; name="sauce"
+
+{"name":"b","manufacturer":"aaa","description":"akaaaa","mainPepper":"aaaa","heat":1,"userId":"61f39db59e298f9ba746f3c8"}
+------WebKitFormBoundary65AqPXz033r5JoMe
+Content-Disposition: form-data; name="image"; filename="sauces.jpg"
+Content-Type: image/jpeg
+
+
+------WebKitFormBoundary65AqPXz033r5JoMe--
+

@@ -1,6 +1,8 @@
 const multer = require('multer');
 
-// Dictionary of MIME types to define the format of images. Adds the correct extension to the created objer.
+const { v4: uuidv4 } = require('uuid');
+
+// Dictionary of MIME types to define the format of images. Adds the correct extension to the created objet.
 const MIME_TYPES = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
@@ -12,13 +14,14 @@ const storage = multer.diskStorage({
     callback(null, 'images');
   },
   filename: (req, file, callback) => {
-    // fullName : original name --> Insert underscores instead of spaces.
+    
     // const name = file.originalname.split(' ').join('_');
-    const fullName = file.originalname.split(' ').join('_');
-    const name = fullName.split('.')[0];
+    // name : original name --> Insert underscores instead of spaces.
+    const name = file.originalname.split(' ').join('_');
+    const newName = name.split('.')[0];
     const extension = MIME_TYPES[file.mimetype];
-    // Full file name : name + underscore + unique number Date.now() + . + extension
-    callback(null, name + "_" + Date.now() + "." + extension);
+    // uuid : Universally unique identifier
+    callback(null, newName + "_" + uuidv4() + "." + extension);
   }
 });
 

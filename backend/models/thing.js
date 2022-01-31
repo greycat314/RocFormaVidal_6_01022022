@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
 const  sanitizerPlugin = require("mongoose-sanitizer");
 
-const regexValue = "/^[a-z0-9À-ÖØ-öø-ÿ -]*$/i"
-const regexMessage = "Caractères autorisées : lettres, lettres accentuées, chiffres, tiret et espace."
+// Model Validation (middleware)
+const thingValidation = require('../middleware/thingValidation');
+
+const regexValue = /^[a-z0-9À-ÖØ-öø-ÿ -]*$/i;
+const regexMessage = "Caractères autorisées : lettres, lettres accentuées, chiffres, tiret et espace.";
 
 const thingSchema = mongoose.Schema({
-	_id: {
-		type: String
-	},
-
 	userId: {
-		type: String
+		type: String,
+		required: true
 	},
 
 	name: {
 		type: String,
 		trim: true,
-		// match: [regexValue, regexMessage],
+		//match: [regexValue, regexMessage],
 		required: true
 	},
 
@@ -69,7 +69,7 @@ const thingSchema = mongoose.Schema({
 	}
 });
 
-// Utilise le HTML Sanitizer de Google Caja pour effectuer la désinfection.
+// Uses Google Caja's HTML Sanitizer to perform disinfection
 thingSchema.plugin(sanitizerPlugin);
 
 module.exports = mongoose.model("Thing", thingSchema);

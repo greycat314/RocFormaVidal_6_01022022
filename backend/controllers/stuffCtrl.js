@@ -1,4 +1,3 @@
-// Thing model required
 const Thing = require("../models/thing");
 // Node 'file system' module. Create and manage files to store or read information
 const fs = require('fs');
@@ -7,26 +6,16 @@ const fs = require('fs');
 exports.createThing = (req, res, next) => {
 	const thingObject = JSON.parse(req.body.sauce);
 	// We remove the automatically generated id from the front-end. The thing id is created by the MongoDB database. 
-	// delete thingObject._id;
-	console.log("\n");
-	console.log("=========================================");
-	console.log("\n");
+	//delete thingObject._id;
+	console.log("\n" + "=========================================" + "\n");
 	console.log(thingObject);
 	const thing = new Thing({
-		// ...thingObject,
-		// Dynamic image url
-		// manufacturer: thingObject.manufacturer,
-		_id: "444444844444444",
-		name: thingObject.name,
-		manufacturer: thingObject.manufacturer,
-		mainPepper: thingObject.mainPepper,
-		description: thingObject.description,
-		imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+		...thingObject,
+		imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`, // Dynamic image url
 		likes: 0,
 		dislikes: 0,
 		usersLiked: [],
-		usersDisliked: [],
-		heat: thingObject.heat
+		usersDisliked: []
 	});
 
 	thing.save()
@@ -37,6 +26,8 @@ exports.createThing = (req, res, next) => {
 			res.status(400).json({ error });
 		});
 };
+
+
 
 // ==================== Find all things ====================
 exports.getAllThings = (req, res, next) => {
