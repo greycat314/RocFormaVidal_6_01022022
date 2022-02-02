@@ -1,9 +1,9 @@
 const validate = require('mongoose-validator');
 
 const regexValue = /^[a-z0-9À-ÖØ-öø-ÿ -]+$/i;
-const messageValue = "Caractères autorisées : lettres, lettres accentuées, chiffres, tiret. Les espaces successifs seront remplacé par un seul espace.";
+const messageValue = "Caractères autorisées : lettres, lettres accentuées, chiffres, tiret, espace.";
 
-exports.nameValidator = [   
+module.exports.nameValidator = [   
     validate({
         validator: 'isLength',
         arguments: [3, 50], // Name: 3 to 50 characters
@@ -14,10 +14,10 @@ exports.nameValidator = [
         validator: 'matches',
         arguments: regexValue,
         message: messageValue,
-    }),
+    }), 
 ];
 
-exports.manufacturerValidator = [
+module.exports.manufacturerValidator = [
     validate({
         validator: 'isLength',
         arguments: [3, 40],
@@ -31,7 +31,7 @@ exports.manufacturerValidator = [
     }),
 ];
 
-exports.descriptionValidator = [
+module.exports.descriptionValidator = [
     validate({
         validator: 'isLength',
         arguments: [10, 200],
@@ -45,7 +45,7 @@ exports.descriptionValidator = [
     }),
 ];
 
-exports.pepperValidator = [
+module.exports.pepperValidator = [
     validate({
         validator: 'isLength',
         arguments: [3, 30],

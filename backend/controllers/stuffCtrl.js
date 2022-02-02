@@ -5,10 +5,7 @@ const fs = require('fs');
 // ==================== Create a new thing ====================
 exports.createThing = (req, res, next) => {
 	const thingObject = JSON.parse(req.body.sauce);
-	// We remove the automatically generated id from the front-end. The thing id is created by the MongoDB database. 
-	//delete thingObject._id;
-	console.log("\n" + "=========================================" + "\n");
-	console.log(thingObject);
+	// console.log(thingObject);
 	const thing = new Thing({
 		...thingObject,
 		imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`, // Dynamic image url
@@ -16,18 +13,18 @@ exports.createThing = (req, res, next) => {
 		dislikes: 0,
 		usersLiked: [],
 		usersDisliked: []
-	});
+	})
 
 	thing.save()
 		.then(() => res.status(201).json({ message: "Object saved." }))
 		.catch(error => {
-			console.log(thing);
-			console.error(error);
+			// Function to show form input errors in console
+			const formInputErrors = require("../modules/formInputErrors");
+			// console.log(thing);
+			formInputErrors.getErrors(error);
 			res.status(400).json({ error });
 		});
 };
-
-
 
 // ==================== Find all things ====================
 exports.getAllThings = (req, res, next) => {
@@ -61,9 +58,9 @@ exports.deleteThing = (req, res, next) => {
     .then(thing => {
 		const filename = thing.imageUrl.split('/images/')[1];
 		fs.unlink(`images/${filename}`, () => {
-        Thing.deleteOne({ _id: req.params.id })
-			.then(() => res.status(200).json({ message: 'Object deleted.'}))
-			.catch(error => res.status(400).json({ error }));
+			Thing.deleteOne({ _id: req.params.id })
+				.then(() => res.status(200).json({ message: 'Object deleted.'}))
+				.catch(error => res.status(400).json({ error }));
 		});
     })
     .catch(error => res.status(500).json({ error }));
