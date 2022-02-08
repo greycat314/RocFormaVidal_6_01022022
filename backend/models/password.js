@@ -4,8 +4,8 @@ const passwordValidator = require('password-validator');
 const passwordSchema = new passwordValidator();
 
 passwordSchema
-.is().min(8)                    // 8 characters minimum
-.has().uppercase()           // At least one capital letter
+.is().min(8)                     // 8 characters minimum
+.has().uppercase()          // At least one capital letter
 .has().lowercase()          // At least a lowercase
 .has().digits()                 // At least one number
 .has().not().spaces()      // No spaces

@@ -10,8 +10,8 @@ const regexManufacturer = /^[a-z0-9À-ÖØ-öø-ÿ -]{3,50}$/i;
 const messageManufacturer = "Caractères autorisées : lettres, lettres accentuées, chiffres, tiret et espace. Nombre : 3 à 50.";
 const regexDescription = /^.{3,200}$/is;
 const messageDescription = "Caractères autorisées : tous plus espace et saut de ligne. Nombre : 3 à 200.";
-const regexMainPepper = /^[a-z0-9À-ÖØ-öø-ÿ ,'-]{3,50}$/i;
-const messageMainPepper = "Caractères autorisées : lettres, lettres accentuées, chiffres, virgule, apostrophe, tiret et espace. Nombre : 3 à 50.";
+const regexMainPepper = /^[a-z0-9À-ÖØ-öø-ÿ ,'\.-]{3,50}$/i;
+const messageMainPepper = "Caractères autorisées : lettres, lettres accentuées, chiffres, virgule, apostrophe, tiret, point et espace. Nombre : 3 à 50.";
 
 const thingSchema = mongoose.Schema({
 	userId: {
@@ -22,21 +22,21 @@ const thingSchema = mongoose.Schema({
 	name: {
 		type: String,
 		trim: true,
-		match: [regex, "name - " + message],
+		match: [regex, message],
 		required: true
 	},
 
 	manufacturer: {
 		type: String,
 		trim: true,
-		match: [regexManufacturer, "manufacturer - " + messageManufacturer],
+		match: [regexManufacturer, messageManufacturer],
 		required: true
 	},
 
 	description: {
 		type: String,
 		trim: true,
-		match: [regexDescription, "description - " + messageDescription],
+		match: [regexDescription, messageDescription],
 		required: true
 	},
 
@@ -61,7 +61,7 @@ const thingSchema = mongoose.Schema({
 	mainPepper: {
 		type: String,
 		trim: true,
-		match: [regexMainPepper, "mainPepper - " + messageMainPepper],
+		match: [regexMainPepper, messageMainPepper],
 		required: true
 	},
 

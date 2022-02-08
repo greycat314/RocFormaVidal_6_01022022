@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 // We check that the TOKEN of the user corresponds to his id in the request. If yes, he will be authorized to change the corresponding data.
+// Middleware to secure all routes
 module.exports = (req, res, next) => {
 	try {
 		const token = req.headers.authorization.split(' ')[1];

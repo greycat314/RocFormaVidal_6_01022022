@@ -2,6 +2,8 @@ const Thing = require("../models/thing");
 // Node 'file system' module. Create and manage files to store or read information
 const fs = require('fs');
 
+uploadedImg = [];
+
 // ==================== Create a new thing ====================
 exports.createThing = (req, res, next) => {
 	const thingObject = JSON.parse(req.body.sauce);
@@ -19,10 +21,10 @@ exports.createThing = (req, res, next) => {
 		.then(() => res.status(201).json({ message: "Object saved." }))
 		.catch(error => {
 			// Function to show form input errors in console
-			const formInputErrors = require("../modules/formInputErrors");
-			// console.log(thing);
-			formInputErrors.getErrors(error);
-			res.status(400).json({ error });
+			// const formInputErrors = require("../modules/formInputErrors");
+			console.log(error);
+			// formInputErrors.getErrors(error);
+			res.status(400).json({ message: error });
 		});
 };
 
@@ -46,6 +48,7 @@ exports.modifyThing = (req, res, next) => {
 		...JSON.parse(req.body.thing),
 		imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
+	
 
 	Thing.updateOne({ _id: req.params.id }, { ...thingObject, _id: req.params.id })
 		.then(() => res.status(200).json({ message: 'Object modified.'}))

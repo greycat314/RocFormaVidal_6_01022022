@@ -3,20 +3,24 @@ const uniqueValidator = require("mongoose-unique-validator"); // Unique email
 
 const sanitizerPlugin = require('mongoose-sanitizer');
 
+const regexEmail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/i;
+const messageEmail = "Adresse email incorrecte";
+
 const userSchema = mongoose.Schema({
   email: {
     type: String,
-    required: true,
-    unique: true,
-    match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, "Adresse email non correcte"]
+    unique: true, // One email for one person 
+    required: [true, "Veuillez entrer votre adresse email"],  
+    match: [regexEmail, "email - " + messageEmail]
   },
+
   password: {
     type: String,
     required: [true, "Veuillez choisir un mot de passe"],
-    match: [/[0-9]{6,}/, "6 chiffres minimum"]
   },
 });
 
+// mongoose-unique-validator is a plugin that checks that the email is unique
 userSchema.plugin(uniqueValidator);
 
 // Purifies the model fields before saving them in the MongoDB database.
