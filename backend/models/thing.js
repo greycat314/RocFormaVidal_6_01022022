@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 const  sanitizerPlugin = require("mongoose-sanitizer");
 
-// Model Validation (middleware)
-// const thingValidation = require('../middleware/thingValidation');
-
 const regex = /^[a-z0-9À-ÖØ-öø-ÿ -]{3,15}$/i;
 const message = "Caractères autorisées : lettres, lettres accentuées, chiffres, tiret et espace. Nombre : 3 à 15.";
 const regexManufacturer = /^[a-z0-9À-ÖØ-öø-ÿ -]{3,50}$/i;

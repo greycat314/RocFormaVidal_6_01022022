@@ -1,6 +1,7 @@
 const Thing = require("../models/thing");
 // Node 'file system' module. Create and manage files to store or read information
 const fs = require('fs');
+// const removeUploadedFiles = require("multer/lib/remove-uploaded-files");
 
 uploadedImg = [];
 
